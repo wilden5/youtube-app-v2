@@ -1,9 +1,9 @@
-html, body {
-  height: 100%;
+html {
   font-size: 10px
 }
 
 body {
+  min-width: 100rem;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }

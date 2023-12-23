@@ -1,0 +1,28 @@
+.toolbar-row-wrapper {
+  display: flex;
+  min-height: 10rem;
+  justify-content: space-between;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: auto;
+}
+
+.search-field {
+  min-width: 50rem;
+  margin-top: 2rem;
+}
+
+.search-button {
+  height: 5.5rem;
+  width: 25rem;
+}
+
+.login-button {
+  display: block;
+  margin-left: auto;
+}
+

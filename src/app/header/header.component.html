@@ -1,1 +1,20 @@
-<p>header works!</p>
+<mat-toolbar color="primary">
+  <mat-toolbar-row class="toolbar-row-wrapper">
+    <div class="search-container">
+      <mat-form-field class="search-field">
+        <input
+          class="search-input"
+          matInput
+          type="text"
+          placeholder="Enter your search request here" />
+      </mat-form-field>
+      <button class="search-button" mat-raised-button color="warn">Search</button>
+      <button mat-fab color="warn">
+        <mat-icon>filter_list</mat-icon>
+      </button>
+    </div>
+    <button class="login-button" mat-fab color="warn">
+      <mat-icon>person</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
