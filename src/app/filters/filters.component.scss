@@ -1,0 +1,19 @@
+.filter-row {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.filter-field {
+  margin-top: 2rem;
+}
+
+.filter-button {
+  height: 85%;
+  width: 15rem !important;
+  font-size: 1.8rem;
+}
+
+.filter-field {
+  min-width: 25rem;
+}
