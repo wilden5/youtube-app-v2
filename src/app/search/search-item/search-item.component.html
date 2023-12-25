@@ -1,1 +1,22 @@
-<p>search-item works!</p>
+<mat-card class="item" *ngIf="searchItem">
+  <img
+    mat-card-image
+    class="item-image"
+    [src]="searchItem.snippet.thumbnails.medium.url"
+    alt="youtube-item-image" />
+  <mat-card-content class="item-content">
+    <h2 class="item-title">{{truncateItemTitle(searchItem.snippet.title)}}</h2>
+    <div class="item-statistics">
+      <span>
+        <mat-icon>remove_red_eye</mat-icon>
+      </span>
+      <span>
+        <mat-icon>thumb_up</mat-icon>
+      </span>
+      <span>
+        <mat-icon>comment</mat-icon>
+      </span>
+    </div>
+  </mat-card-content>
+  <button class="item-button" mat-raised-button color="primary">more...</button>
+</mat-card>
