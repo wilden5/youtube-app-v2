@@ -4,12 +4,19 @@
       <img class="youtube-logo" src="./assets/y-logo.png" alt="youtube-logo" />
       <mat-form-field class="search-field">
         <input
+          #searchInput
           class="search-input"
           matInput
           type="text"
           placeholder="Enter your search request here" />
       </mat-form-field>
-      <button class="search-button" mat-raised-button color="warn">Search</button>
+      <button
+        (click)="performSearch(searchInput.value)"
+        class="search-button"
+        mat-raised-button
+        color="warn">
+        Search
+      </button>
       <button (click)="changeFiltersState()" mat-fab color="warn">
         <mat-icon>filter_list</mat-icon>
       </button>
