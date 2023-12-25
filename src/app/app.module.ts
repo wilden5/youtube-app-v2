@@ -13,6 +13,7 @@ import { HeaderComponent } from './header/header.component';
 import { SearchResultComponent } from './search/search-result/search-result.component';
 import { SearchItemComponent } from './search/search-item/search-item.component';
 import { FiltersComponent } from './filters/filters.component';
+import { ColoredBorderDirective } from './directives/colored-border.directive';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { FiltersComponent } from './filters/filters.component';
     SearchResultComponent,
     SearchItemComponent,
     FiltersComponent,
+    ColoredBorderDirective,
   ],
   imports: [
     BrowserModule,
