@@ -1,6 +1,6 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { mockYoutubeSearchResponse } from '../../utils/mock';
-import { IYoutubeItem } from '../../models/youtube-search';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { of } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SearchService } from '../../services/search.service';
 
 @Component({
@@ -9,16 +9,16 @@ import { SearchService } from '../../services/search.service';
   styleUrls: ['./search-result.component.scss'],
 })
 export class SearchResultComponent implements OnInit {
-  protected readonly mockYoutubeSearchResponse = mockYoutubeSearchResponse;
-
   searchService = inject(SearchService);
 
-  array: IYoutubeItem[] = [];
+  private destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
-    this.searchService.searchQuery.subscribe((obs) => {
-      this.array = this.mockYoutubeSearchResponse.items.filter((item) =>
-        item.snippet.title.toLowerCase().includes(obs.toLowerCase())
+    this.searchService.searchQuery.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((obs) => {
+      this.searchService.mockYoutubeItemsSorted = of(
+        this.searchService.mockYoutubeItems.filter((item) =>
+          item.snippet.title.toLowerCase().includes(obs.toLowerCase())
+        )
       );
     });
   }

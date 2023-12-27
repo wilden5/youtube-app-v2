@@ -1,5 +1,5 @@
 <div class="search-items-container">
-  <ng-container *ngFor="let searchItem of array">
+  <ng-container *ngFor="let searchItem of searchService.mockYoutubeItemsSorted | async">
     <app-search-item class="search-item" [searchItem]="searchItem"></app-search-item>
   </ng-container>
 </div>

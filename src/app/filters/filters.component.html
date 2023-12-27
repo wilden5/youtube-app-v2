@@ -1,9 +1,15 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row class="filter-row">
-    <button class="filter-button" mat-raised-button color="warn">date</button>
-    <button class="filter-button" mat-raised-button color="warn">count of views</button>
+    <button (click)="applyDateFilter()" class="filter-button" mat-raised-button color="warn">
+      date
+    </button>
+    <button (click)="filterByViews()" class="filter-button" mat-raised-button color="warn">
+      count of views
+    </button>
     <mat-form-field class="filter-field">
       <input
+        #keyword
+        (input)="applyByKeywordFilter(keyword.value)"
         class="filter-by-keyword"
         matInput
         type="text"
