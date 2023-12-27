@@ -1,6 +1,6 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FiltersService } from '../services/filters.service';
+import { FiltersService } from '../../../services/filters.service';
 
 @Component({
   selector: 'app-filters',

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { IYoutubeItem } from '../models/youtube-search';
+import { IYoutubeItem } from '../youtube/models/youtube-search';
 import { mockYoutubeSearchResponse } from '../utils/mock';
 
 @Injectable({
