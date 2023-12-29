@@ -1,0 +1,21 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 40rem;
+  height: 23rem;
+  background-color: floralwhite;
+  padding: 5rem;
+  border: 0.2rem solid gray;
+  border-radius: 1rem;
+}
+
+.password-field {
+  margin-bottom: 3rem;
+}

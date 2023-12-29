@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row class="toolbar-row-wrapper">
     <div class="search-container">
-      <a routerLink="/"
+      <a [routerLink]="['/']"
         ><img class="youtube-logo" src="../../../../assets/y-logo.png" alt="youtube-logo"
       /></a>
       <mat-form-field class="search-field">
@@ -23,9 +23,24 @@
         <mat-icon>filter_list</mat-icon>
       </button>
     </div>
-    <button class="login-button" mat-fab color="warn">
-      <mat-icon>person</mat-icon>
-    </button>
+    <div class="auth-button">
+      <button
+        *ngIf="!loginService.isUserLoggedIn()"
+        (click)="loginUser()"
+        class="login-button"
+        mat-fab
+        color="warn">
+        <mat-icon>person</mat-icon>
+      </button>
+      <button
+        *ngIf="loginService.isUserLoggedIn()"
+        (click)="logoutUser()"
+        class="login-button"
+        mat-fab
+        color="warn">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
   </mat-toolbar-row>
 </mat-toolbar>
 <app-filters *ngIf="filtersState"></app-filters>

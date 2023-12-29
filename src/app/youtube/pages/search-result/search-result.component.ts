@@ -9,9 +9,10 @@ import { SearchService } from '../../services/search.service';
   styleUrls: ['./search-result.component.scss'],
 })
 export class SearchResultComponent implements OnInit {
-  searchService = inject(SearchService);
-
-  private destroyRef = inject(DestroyRef);
+  constructor(
+    protected searchService: SearchService,
+    private destroyRef: DestroyRef
+  ) {}
 
   ngOnInit(): void {
     this.searchService.searchQuery.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((obs) => {

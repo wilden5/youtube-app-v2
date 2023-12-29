@@ -1,0 +1,31 @@
+<form class="login-form" [formGroup]="loginForm">
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <mat-error *ngIf="userEmail.invalid">
+      Field is required and should be a valid email address!
+    </mat-error>
+    <input
+      type="email"
+      matInput
+      formControlName="userEmail"
+      placeholder="Ex. pat@example.com"
+      autocomplete="email" />
+  </mat-form-field>
+  <mat-form-field class="password-field">
+    <mat-label>Password</mat-label>
+    <mat-error *ngIf="userPassword.invalid">
+      Field is required and should has length >= 8, 1 upper/lower case letter, 1 digit, 1 special
+      symbol
+    </mat-error>
+    <input type="password" matInput formControlName="userPassword" autocomplete="password" />
+  </mat-form-field>
+  <button
+    type="button"
+    [disabled]="loginForm.invalid"
+    (click)="submitForm()"
+    class="submit-login-form"
+    mat-raised-button
+    color="primary">
+    Submit form
+  </button>
+</form>
