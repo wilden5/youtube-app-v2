@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
-import { SearchService } from './search.service';
+import { SearchService } from '../../youtube/services/search.service';
 
 @Injectable({
   providedIn: 'root',

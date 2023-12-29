@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { SearchService } from '../../../services/search.service';
+import { Router } from '@angular/router';
+import { SearchService } from '../../../youtube/services/search.service';
 
 @Component({
   selector: 'app-header',
@@ -9,6 +10,8 @@ import { SearchService } from '../../../services/search.service';
 export class HeaderComponent {
   searchService = inject(SearchService);
 
+  router = inject(Router);
+
   filtersState = false;
 
   changeFiltersState(): void {
@@ -17,5 +20,6 @@ export class HeaderComponent {
 
   performSearch(searchQuery: string): void {
     this.searchService.searchQuery.next(searchQuery);
+    this.router.navigate(['search']);
   }
 }

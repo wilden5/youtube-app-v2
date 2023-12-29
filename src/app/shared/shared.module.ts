@@ -5,6 +5,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { RouterLink } from '@angular/router';
 import { ColoredBorderDirective } from './directives/colored-border.directive';
 import { SearchItemComponent } from './components/search-item/search-item.component';
 
@@ -17,6 +18,7 @@ import { SearchItemComponent } from './components/search-item/search-item.compon
     MatButtonModule,
     MatIconModule,
     MatCardModule,
+    RouterLink,
   ],
   exports: [
     ColoredBorderDirective,
@@ -26,6 +28,7 @@ import { SearchItemComponent } from './components/search-item/search-item.compon
     MatButtonModule,
     MatIconModule,
     MatCardModule,
+    RouterLink,
   ],
 })
 export class SharedModule {}
