@@ -18,6 +18,12 @@
       </span>
     </div>
   </mat-card-content>
-  <button class="item-button" mat-raised-button color="primary">more...</button>
+  <button
+    (click)="openDetailedInformation(searchItem.id.videoId)"
+    class="item-button"
+    mat-raised-button
+    color="primary">
+    more...
+  </button>
   <div class="item-border" [appColoredBorder]="searchItem.snippet.publishedAt"></div>
 </mat-card>

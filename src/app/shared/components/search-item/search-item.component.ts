@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router, Routes } from '@angular/router';
 import { IYoutubeItem } from '../../../youtube/models/youtube-search';
 
 @Component({
@@ -9,7 +10,13 @@ import { IYoutubeItem } from '../../../youtube/models/youtube-search';
 export class SearchItemComponent {
   @Input() searchItem?: IYoutubeItem;
 
+  constructor(private router: Router) {}
+
   truncateItemTitle(title: string): string {
     return title.length > 40 ? `${title.slice(0, 40)}...` : title;
+  }
+
+  openDetailedInformation(itemId: string): void {
+    this.router.navigate(['search', `${itemId}`]);
   }
 }

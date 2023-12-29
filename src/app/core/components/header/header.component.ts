@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { SearchService } from '../../../youtube/services/search.service';
 import { LoginService } from '../../../auth/services/login.service';
@@ -22,8 +22,10 @@ export class HeaderComponent {
   }
 
   performSearch(searchQuery: string): void {
-    this.searchService.searchQuery.next(searchQuery);
     this.router.navigate(['search']);
+    setTimeout(() => {
+      this.searchService.searchQuery.next(searchQuery);
+    }, 50);
   }
 
   loginUser(): void {
