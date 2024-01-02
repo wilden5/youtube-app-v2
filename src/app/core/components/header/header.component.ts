@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { SearchService } from '../../../youtube/services/search.service';
 import { LoginService } from '../../../auth/services/login.service';
+import { LoggerService } from '../../services/logger/logger.service';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,8 @@ export class HeaderComponent {
   constructor(
     protected searchService: SearchService,
     protected router: Router,
-    protected loginService: LoginService
+    protected loginService: LoginService,
+    private loggerService: LoggerService
   ) {}
 
   filtersState = false;
@@ -22,6 +24,7 @@ export class HeaderComponent {
   }
 
   performSearch(searchQuery: string): void {
+    this.loggerService.logMessage('Search performed!');
     this.router.navigate(['search']);
     setTimeout(() => {
       this.searchService.searchQuery.next(searchQuery);

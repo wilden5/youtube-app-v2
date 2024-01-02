@@ -1,18 +1,29 @@
-<ng-container *ngIf="searchItem">
-  <button>Back</button>
-  <img [src]="searchItem.snippet.thumbnails.high.url" alt="item-image" />
-  <div>{{searchItem.snippet.title}}</div>
-  <div>{{searchItem.snippet.publishedAt | date: 'medium'}}</div>
-  <div>{{searchItem.snippet.description}}</div>
-  <div class="item-statistics">
-    <span>
-      <mat-icon>remove_red_eye</mat-icon>
-    </span>
-    <span>
-      <mat-icon>thumb_up</mat-icon>
-    </span>
-    <span>
-      <mat-icon>comment</mat-icon>
-    </span>
+<div class="item" *ngIf="searchItem">
+  <button [routerLink]="['/']" appColoredBorder class="button-back">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+  </button>
+  <img
+    class="item-image"
+    [src]="searchItem.snippet.thumbnails.high.url"
+    height="460"
+    alt="item-image" />
+  <div class="item-information">
+    <div class="item-header">
+      <h2 class="item-title">{{searchItem.snippet.title}}</h2>
+      <div>{{searchItem.snippet.publishedAt | date: 'medium'}}</div>
+    </div>
+    <div class="item-description">{{searchItem.snippet.description}}</div>
+    <div class="item-statistics">
+      <span>
+        <mat-icon>remove_red_eye</mat-icon>
+      </span>
+      <span>
+        <mat-icon>thumb_up</mat-icon>
+      </span>
+      <span>
+        <mat-icon>comment</mat-icon>
+      </span>
+    </div>
+    <div class="item-border" [appColoredBorder]="searchItem.snippet.publishedAt"></div>
   </div>
-</ng-container>
+</div>

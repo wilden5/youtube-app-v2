@@ -31,7 +31,7 @@ export class ColoredBorderDirective implements OnInit {
         this.elementRef.nativeElement.style.backgroundColor = 'green';
         break;
       default:
-        this.elementRef.nativeElement.style.backgroundColor = 'blue';
+        this.elementRef.nativeElement.style.backgroundColor = 'cornflowerblue';
         break;
     }
   }
