@@ -15,12 +15,11 @@ export class SearchResultComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.searchService.searchQuery.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((obs) => {
-      this.searchService.mockYoutubeItemsSorted = of(
-        this.searchService.mockYoutubeItems.filter((item) =>
-          item.snippet.title.toLowerCase().includes(obs.toLowerCase())
-        )
-      );
-    });
+    this.searchService.searchQuery
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((searchQuery) => {
+        this.searchService.mockYoutubeItemsSorted =
+          this.searchService.fetchYoutubeItemsBySearchQuery(searchQuery);
+      });
   }
 }

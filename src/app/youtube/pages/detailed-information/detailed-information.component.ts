@@ -15,8 +15,8 @@ export class DetailedInformationComponent {
     private activatedRoute: ActivatedRoute,
     private searchService: SearchService
   ) {
-    this.searchItem = this.searchService.mockYoutubeItems.find(
+    /* this.searchItem = this.searchService.mockYoutubeItems.find(
       (item) => item.id.videoId === this.activatedRoute.snapshot.paramMap.get('id')
-    );
+    ) */
   }
 }

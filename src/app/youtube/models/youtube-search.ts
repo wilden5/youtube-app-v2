@@ -28,10 +28,19 @@ export interface IYoutubeItem {
       high: IYoutubeThumbnail;
     };
   };
+  statistics?: IYoutubeItemStatistics;
 }
 
 export interface IYoutubeThumbnail {
   url: string;
   width: number;
   height: number;
+}
+
+export interface IYoutubeItemStatistics {
+  viewCount: string;
+  likeCount: string;
+  dislikeCount: string;
+  favoriteCount: string;
+  commentCount: string;
 }

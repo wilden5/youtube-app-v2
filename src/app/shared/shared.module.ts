@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { RouterLink } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { ColoredBorderDirective } from './directives/colored-border.directive';
 import { SearchItemComponent } from './components/search-item/search-item.component';
 
@@ -21,6 +22,7 @@ import { SearchItemComponent } from './components/search-item/search-item.compon
     MatCardModule,
     RouterLink,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   exports: [
     ColoredBorderDirective,
@@ -32,6 +34,7 @@ import { SearchItemComponent } from './components/search-item/search-item.compon
     MatCardModule,
     RouterLink,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
 })
 export class SharedModule {}
