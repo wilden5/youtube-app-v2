@@ -18,6 +18,7 @@
       </button>
     </div>
     <div class="auth-button">
+      <div class="login-status">Login status: {{loginService.loginStatus$ | async}}</div>
       <button
         *ngIf="!loginService.isUserLoggedIn()"
         (click)="loginUser()"

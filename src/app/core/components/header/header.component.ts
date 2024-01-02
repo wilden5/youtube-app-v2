@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SearchService } from '../../../youtube/services/search.service';
 import { LoginService } from '../../../auth/services/login.service';
@@ -9,7 +9,7 @@ import { LoggerService } from '../../services/logger/logger.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   constructor(
     protected searchService: SearchService,
     protected router: Router,
@@ -18,6 +18,10 @@ export class HeaderComponent {
   ) {}
 
   filtersState = false;
+
+  ngOnInit(): void {
+    this.loginService.loginStatus$.subscribe();
+  }
 
   changeFiltersState(): void {
     this.filtersState = !this.filtersState;
@@ -34,6 +38,7 @@ export class HeaderComponent {
   }
 
   logoutUser(): void {
+    this.loginService.loginStatus$.next(false);
     localStorage.clear();
     this.router.navigate(['auth/login']);
   }

@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IUser } from '../../models/user.model';
 import { passwordValidator } from '../../validators/password.validator';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private loginService: LoginService
   ) {}
 
   get userEmail(): AbstractControl {
@@ -29,6 +31,7 @@ export class LoginComponent {
   }
 
   submitForm(): void {
+    this.loginService.loginStatus$.next(true);
     localStorage.setItem('user-credentials', JSON.stringify(this.loginForm.value as IUser));
     this.router.navigate(['/']);
   }
