@@ -26,9 +26,7 @@ export class HeaderComponent {
   performSearch(searchQuery: string): void {
     this.loggerService.logMessage('Search performed!');
     this.router.navigate(['search']);
-    setTimeout(() => {
-      this.searchService.searchQuery.next(searchQuery);
-    }, 50);
+    this.searchService.searchQuery.next(searchQuery);
   }
 
   loginUser(): void {

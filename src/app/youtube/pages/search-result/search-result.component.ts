@@ -1,5 +1,5 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { of } from 'rxjs';
+import { debounceTime, filter, of } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SearchService } from '../../services/search.service';
 
@@ -16,7 +16,11 @@ export class SearchResultComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchService.searchQuery
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        filter((query) => query.length > 2),
+        debounceTime(2000)
+      )
       .subscribe((searchQuery) => {
         this.searchService.mockYoutubeItemsSorted =
           this.searchService.fetchYoutubeItemsBySearchQuery(searchQuery);
