@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Router, Routes } from '@angular/router';
+import { Router } from '@angular/router';
 import { IYoutubeItem } from '../../../youtube/models/youtube-search';
 
 @Component({

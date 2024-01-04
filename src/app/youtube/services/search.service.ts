@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { concatMap, map, Observable, Subject, tap } from 'rxjs';
+import { catchError, concatMap, EMPTY, map, Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { IYoutubeItem, IYoutubeSearchResponse } from '../models/youtube-search';
 
@@ -20,13 +20,15 @@ export class SearchService {
         concatMap((response) => {
           const urls = response.items.map((item) => item.id.videoId).join(',');
           return this.fetchYoutubeItemStatistic(urls);
-        })
+        }),
+        catchError(() => EMPTY)
       );
   }
 
   fetchYoutubeItemStatistic(ids: string): Observable<IYoutubeItem[]> {
-    return this.http
-      .get<IYoutubeSearchResponse>(`videos?part=snippet,statistics&id=${ids}`)
-      .pipe(map((response) => response.items));
+    return this.http.get<IYoutubeSearchResponse>(`videos?part=snippet,statistics&id=${ids}`).pipe(
+      map((response) => response.items),
+      catchError(() => EMPTY)
+    );
   }
 }
