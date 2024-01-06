@@ -1,0 +1,28 @@
+<div class="wrapper">
+  <h2 class="form-header">Create new video card</h2>
+  <form [formGroup]="createItemForm">
+    <mat-form-field class="form-field">
+      <mat-label>Title</mat-label>
+      <mat-error></mat-error>
+      <input type="text" matInput formControlName="title" />
+    </mat-form-field>
+    <mat-form-field class="form-field">
+      <mat-label>Description</mat-label>
+      <mat-error></mat-error>
+      <input type="text" matInput formControlName="description" />
+    </mat-form-field>
+    <mat-form-field class="form-field">
+      <mat-label>Img</mat-label>
+      <mat-error></mat-error>
+      <input type="text" matInput formControlName="img" />
+    </mat-form-field>
+    <mat-form-field class="form-field">
+      <mat-label>Link</mat-label>
+      <mat-error></mat-error>
+      <input type="text" matInput formControlName="link" />
+    </mat-form-field>
+  </form>
+  <button type="button" (click)="submitForm()" mat-raised-button color="primary">
+    Submit form
+  </button>
+</div>

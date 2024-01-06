@@ -1,5 +1,5 @@
 <div class="item" *ngIf="searchItem | async as item">
-  <button [routerLink]="['/']" appColoredBorder class="button-back">
+  <button [routerLink]="['/search']" appColoredBorder class="button-back">
     <mat-icon>keyboard_arrow_left</mat-icon>
   </button>
   <img class="item-image" [src]="item.snippet.thumbnails.high.url" height="475" alt="item-image" />

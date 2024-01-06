@@ -1,0 +1,24 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 40rem;
+  background-color: antiquewhite;
+  padding: 3rem;
+  border-radius: 1rem;
+}
+
+.form-field {
+  width: 100%;
+}
+
+.form-header {
+  font-size: 3rem;
+  align-self: center;
+}

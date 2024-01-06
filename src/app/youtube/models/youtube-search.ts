@@ -10,13 +10,15 @@ export interface IYoutubeSearchResponse {
   items: IYoutubeItem[];
 }
 
+export interface IYoutubeItemID {
+  kind: string;
+  videoId: string;
+}
+
 export interface IYoutubeItem {
   kind: string;
   etag: string;
-  id: {
-    kind: string;
-    videoId: string;
-  };
+  id: IYoutubeItemID;
   snippet: {
     publishedAt: string;
     channelId: string;

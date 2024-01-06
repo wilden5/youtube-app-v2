@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { IYoutubeItem } from '../../../youtube/models/youtube-search';
+import { IYoutubeItem, IYoutubeItemID } from '../../../youtube/models/youtube-search';
 
 @Component({
   selector: 'app-search-item',
@@ -18,7 +18,11 @@ export class SearchItemComponent {
     return title.length > 40 ? `${title.slice(0, 40)}...` : title;
   }
 
-  openDetailedInformation(itemId: string): void {
-    this.router.navigate(['search', `${itemId}`]);
+  openDetailedInformation(itemId: string | IYoutubeItemID): void {
+    if (typeof itemId === 'string') {
+      this.router.navigate(['search', `${itemId}`]);
+    } else {
+      this.router.navigate(['search', `${itemId.videoId}`]);
+    }
   }
 }
