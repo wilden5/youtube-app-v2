@@ -1,32 +1,28 @@
-<div class="item" *ngIf="searchItem">
+<div class="item" *ngIf="searchItem | async as item">
   <button [routerLink]="['/']" appColoredBorder class="button-back">
     <mat-icon>keyboard_arrow_left</mat-icon>
   </button>
-  <img
-    class="item-image"
-    [src]="searchItem.snippet.thumbnails.high.url"
-    height="460"
-    alt="item-image" />
+  <img class="item-image" [src]="item.snippet.thumbnails.high.url" height="475" alt="item-image" />
   <div class="item-information">
     <div class="item-header">
-      <h2 class="item-title">{{searchItem.snippet.title}}</h2>
-      <div>{{searchItem.snippet.publishedAt | date: 'medium'}}</div>
+      <h2 class="item-title">{{item.snippet.title}}</h2>
+      <div>{{item.snippet.publishedAt | date: 'medium'}}</div>
     </div>
-    <div class="item-description">{{searchItem.snippet.description}}</div>
+    <div class="item-description">{{truncateItemDescription(item.snippet.description)}}</div>
     <div class="item-statistics">
       <span>
         <mat-icon>remove_red_eye</mat-icon>
-        {{searchItem.statistics?.viewCount}}
+        {{item.statistics?.viewCount}}
       </span>
       <span>
         <mat-icon>thumb_up</mat-icon>
-        {{searchItem.statistics?.likeCount}}
+        {{item.statistics?.likeCount}}
       </span>
       <span>
         <mat-icon>comment</mat-icon>
-        {{searchItem.statistics?.commentCount}}
+        {{item.statistics?.commentCount}}
       </span>
     </div>
-    <div class="item-border" [appColoredBorder]="searchItem.snippet.publishedAt"></div>
+    <div class="item-border" [appColoredBorder]="item.snippet.publishedAt"></div>
   </div>
 </div>

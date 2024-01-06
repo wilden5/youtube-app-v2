@@ -8,6 +8,8 @@ import { IYoutubeItem } from '../../../youtube/models/youtube-search';
   styleUrls: ['./search-item.component.scss'],
 })
 export class SearchItemComponent {
+  protected readonly String = String;
+
   @Input() searchItem?: IYoutubeItem;
 
   constructor(private router: Router) {}

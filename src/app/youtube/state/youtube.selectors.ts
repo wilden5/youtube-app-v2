@@ -1,16 +1,17 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createSelector } from '@ngrx/store';
 import { YoutubeState } from './youtube.reducer';
+import { AppState } from '../../core/root.state';
 
-export const selectYoutubeFeature = createFeatureSelector<YoutubeState>('youtube');
+export const selectYoutubeFeature = (state: AppState): YoutubeState => state.youtube;
 
 export const selectYoutubeItems = createSelector(
   selectYoutubeFeature,
-  (youtubeState) => youtubeState.youtubeItems
+  (youtubeState: YoutubeState) => youtubeState.youtubeItems
 );
 
 export const selectYoutubeIds = createSelector(
   selectYoutubeFeature,
-  (youtubeState) => youtubeState.itemsIds
+  (youtubeState: YoutubeState) => youtubeState.itemsIds
 );
 
 export const selectAllItems = createSelector(
@@ -21,3 +22,8 @@ export const selectAllItems = createSelector(
     return items;
   }
 );
+
+export const selectYoutubeSpecificItem = (id: string) =>
+  createSelector(selectYoutubeItems, selectYoutubeIds, (item) => {
+    return item[id];
+  });
