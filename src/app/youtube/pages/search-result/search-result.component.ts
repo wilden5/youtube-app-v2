@@ -1,12 +1,12 @@
 import { Component, DestroyRef, OnInit } from '@angular/core';
-import { debounceTime, filter, Observable } from 'rxjs';
+import { debounceTime, filter } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Store } from '@ngrx/store';
 import { SearchService } from '../../services/search.service';
 import { fetchYoutubeItems } from '../../state/youtube.actions';
-import { IYoutubeItem } from '../../models/youtube-search';
 import { selectAllItems } from '../../state/youtube.selectors';
 import { AppState } from '../../../core/root.state';
+import { FiltersService } from '../../../core/services/filters.service';
 
 @Component({
   selector: 'app-search-result',
@@ -14,16 +14,15 @@ import { AppState } from '../../../core/root.state';
   styleUrls: ['./search-result.component.scss'],
 })
 export class SearchResultComponent implements OnInit {
-  protected allYoutubeItems$?: Observable<IYoutubeItem[]>;
-
   constructor(
     protected searchService: SearchService,
     private destroyRef: DestroyRef,
-    protected store: Store<AppState>
+    protected store: Store<AppState>,
+    protected filterService: FiltersService
   ) {}
 
   ngOnInit(): void {
-    this.allYoutubeItems$ = this.store.select(selectAllItems);
+    this.filterService.allYoutubeItems$ = this.store.select(selectAllItems);
     this.searchService.searchQuery
       .pipe(
         takeUntilDestroyed(this.destroyRef),

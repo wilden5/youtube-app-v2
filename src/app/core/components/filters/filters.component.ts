@@ -20,7 +20,9 @@ export class FiltersComponent implements OnInit {
     this.filtersService.filterByDate();
   }
 
-  filterByViews(): void {}
+  applyViewsFilter(): void {
+    this.filtersService.filterByViews();
+  }
 
   applyByKeywordFilter(value: string): void {
     this.filtersService.filterQuery.next(value);

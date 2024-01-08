@@ -1,42 +1,47 @@
-import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, map } from 'rxjs';
-import { SearchService } from '../../youtube/services/search.service';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, map, Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from '../root.state';
+import {
+  selectSortAllItemsByDate,
+  selectSortAllItemsByViews,
+} from '../../youtube/state/youtube.selectors';
+import { IYoutubeItem } from '../../youtube/models/youtube-search';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FiltersService {
-  private searchService = inject(SearchService);
-
   private isDateSortAsc = true;
+
+  private isViewsSortAsc = true;
 
   filterQuery = new BehaviorSubject<string>('');
 
+  allYoutubeItems$?: Observable<IYoutubeItem[]>;
+
+  constructor(private store: Store<AppState>) {}
+
   filterByDate(): void {
     if (this.isDateSortAsc) {
-      this.searchService.mockYoutubeItemsSorted = this.searchService.mockYoutubeItemsSorted.pipe(
-        map((array) =>
-          array.sort(
-            (a, b) =>
-              Number(new Date(b.snippet.publishedAt)) - Number(new Date(a.snippet.publishedAt))
-          )
-        )
-      );
+      this.allYoutubeItems$ = this.store.select(selectSortAllItemsByDate('asc'));
     } else {
-      this.searchService.mockYoutubeItemsSorted = this.searchService.mockYoutubeItemsSorted.pipe(
-        map((array) =>
-          array.sort(
-            (a, b) =>
-              Number(new Date(a.snippet.publishedAt)) - Number(new Date(b.snippet.publishedAt))
-          )
-        )
-      );
+      this.allYoutubeItems$ = this.store.select(selectSortAllItemsByDate('desc'));
     }
     this.isDateSortAsc = !this.isDateSortAsc;
   }
 
+  filterByViews(): void {
+    if (this.isViewsSortAsc) {
+      this.allYoutubeItems$ = this.store.select(selectSortAllItemsByViews('asc'));
+    } else {
+      this.allYoutubeItems$ = this.store.select(selectSortAllItemsByViews('desc'));
+    }
+    this.isViewsSortAsc = !this.isViewsSortAsc;
+  }
+
   filterByKeyword(): void {
-    this.searchService.mockYoutubeItemsSorted = this.searchService.mockYoutubeItemsSorted.pipe(
+    this.allYoutubeItems$ = this.allYoutubeItems$?.pipe(
       map((array) =>
         array.filter((item) =>
           item.snippet.title.toLowerCase().includes(this.filterQuery.value.toLowerCase())
