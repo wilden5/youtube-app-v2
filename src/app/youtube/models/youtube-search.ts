@@ -31,6 +31,7 @@ export interface IYoutubeItem {
     };
   };
   statistics?: IYoutubeItemStatistics;
+  isCustom?: boolean;
 }
 
 export interface IYoutubeThumbnail {

@@ -20,3 +20,8 @@ export const addCustomItem = createAction(
   '[CUSTOM ITEM] Add Custom Item',
   props<{ item: Partial<IYoutubeItem> }>()
 );
+
+export const deleteCustomItem = createAction(
+  '[CUSTOM ITEM] Delete Custom Item',
+  props<{ id: string }>()
+);

@@ -61,6 +61,7 @@ export class CustomItemComponent {
           high: itemThumbnail as IYoutubeThumbnail,
         },
       },
+      isCustom: true,
     };
     this.store.dispatch(addCustomItem({ item: customItem }));
     this.router.navigate(['/search']);

@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { IYoutubeItem, IYoutubeItemID } from '../../../youtube/models/youtube-search';
+import { AppState } from '../../../core/root.state';
+import { deleteCustomItem } from '../../../youtube/state/youtube.actions';
 
 @Component({
   selector: 'app-search-item',
@@ -12,7 +15,10 @@ export class SearchItemComponent {
 
   @Input() searchItem?: IYoutubeItem;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private store: Store<AppState>
+  ) {}
 
   truncateItemTitle(title: string): string {
     return title.length > 40 ? `${title.slice(0, 40)}...` : title;
@@ -24,5 +30,9 @@ export class SearchItemComponent {
     } else {
       this.router.navigate(['search', `${itemId.videoId}`]);
     }
+  }
+
+  deleteCustomItem(id: string): void {
+    this.store.dispatch(deleteCustomItem({ id }));
   }
 }

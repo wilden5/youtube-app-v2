@@ -21,12 +21,21 @@
       </span>
     </div>
   </mat-card-content>
-  <button
-    (click)="openDetailedInformation(searchItem.id)"
-    class="item-button"
-    mat-raised-button
-    color="primary">
-    more...
-  </button>
+  <div class="buttons">
+    <button
+      (click)="openDetailedInformation(searchItem.id)"
+      class="item-button"
+      mat-raised-button
+      color="primary">
+      more...
+    </button>
+    <button
+      (click)="deleteCustomItem(searchItem.id.videoId)"
+      class="delete-button"
+      mat-fab
+      *ngIf="searchItem.isCustom">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
   <div class="item-border" [appColoredBorder]="searchItem.snippet.publishedAt"></div>
 </mat-card>

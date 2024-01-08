@@ -20,11 +20,22 @@
 
 .item-button {
   width: 20rem;
-  margin-top: auto;
-  margin-bottom: 1rem;
   align-self: center;
 }
 
 .item-border {
   height: 0.5rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: auto;
+  margin-bottom: 1rem;
+}
+
+.delete-button {
+  width: 4rem;
+  height: 4rem;
 }
