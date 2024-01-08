@@ -25,3 +25,18 @@ export const deleteCustomItem = createAction(
   '[CUSTOM ITEM] Delete Custom Item',
   props<{ id: string }>()
 );
+
+export const loadNextPage = createAction(
+  '[[YOUTUBE] Load Next Page Attempt]',
+  props<{ query: string; pageToken: string }>()
+);
+
+export const loadNextPageSuccess = createAction(
+  '[[YOUTUBE] Load Next Page Success]',
+  props<{ youtubeItems: IYoutubeItem[] }>()
+);
+
+export const loadNextPageFailure = createAction(
+  '[YOUTUBE] Load Next Page Failure',
+  props<{ error: Error }>()
+);

@@ -1,3 +1,19 @@
+<div class="pag-buttons" *ngIf="filterService.allYoutubeItems$ | async">
+  <button
+    [disabled]="searchService.prevPageToken.length < 1"
+    (click)="prevPageClick()"
+    mat-raised-button
+    color="warn">
+    Prev Page
+  </button>
+  <button
+    [disabled]="searchService.nextPageToken.length < 1"
+    (click)="nextPageClick()"
+    mat-raised-button
+    color="warn">
+    Next Page
+  </button>
+</div>
 <div class="search-items-container">
   <ng-container *ngIf="filterService.allYoutubeItems$ | async as youtubeItems">
     <ng-container *ngFor="let searchItem of youtubeItems">

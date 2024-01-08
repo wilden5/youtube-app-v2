@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { catchError, concatMap, EMPTY, map, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, catchError, concatMap, EMPTY, map, Observable, Subject, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { IYoutubeItem, IYoutubeSearchResponse } from '../models/youtube-search';
 
@@ -7,16 +7,26 @@ import { IYoutubeItem, IYoutubeSearchResponse } from '../models/youtube-search';
   providedIn: 'root',
 })
 export class SearchService {
+  nextPageToken = '';
+
+  prevPageToken = '';
+
   constructor(private http: HttpClient) {}
 
-  searchQuery = new Subject<string>();
+  searchQuery = new BehaviorSubject<string>('');
 
-  mockYoutubeItemsSorted = new Observable<IYoutubeItem[]>();
-
-  fetchYoutubeItemsBySearchQuery(query: string): Observable<IYoutubeItem[]> {
+  fetchYoutubeItemsBySearchQuery(query: string, pageToken?: string): Observable<IYoutubeItem[]> {
     return this.http
-      .get<IYoutubeSearchResponse>(`search?part=snippet&q=${query}&maxResults=20`)
+      .get<IYoutubeSearchResponse>(
+        `search?part=snippet&q=${query}&maxResults=20&pageToken=${pageToken || ''}`
+      )
       .pipe(
+        tap((response) => {
+          if (response.prevPageToken) {
+            this.prevPageToken = response.prevPageToken;
+          }
+          this.nextPageToken = response.nextPageToken;
+        }),
         concatMap((response) => {
           const urls = response.items.map((item) => item.id.videoId).join(',');
           return this.fetchYoutubeItemStatistic(urls);

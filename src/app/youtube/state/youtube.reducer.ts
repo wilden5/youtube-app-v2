@@ -1,6 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
 import { IYoutubeItem } from '../models/youtube-search';
-import { addCustomItem, deleteCustomItem, fetchYoutubeItemsSuccess } from './youtube.actions';
+import {
+  addCustomItem,
+  deleteCustomItem,
+  fetchYoutubeItemsSuccess,
+  loadNextPageSuccess,
+} from './youtube.actions';
 
 export interface YoutubeState {
   youtubeItems: { [key: string]: IYoutubeItem };
@@ -37,6 +42,17 @@ export const youtubeReducer = createReducer(
     return {
       ...state,
       youtubeItems: remainingItems,
+    };
+  }),
+  on(loadNextPageSuccess, (state, { youtubeItems }) => {
+    const items = youtubeItems.reduce((acc, item) => {
+      return { ...acc, [String(item.id)]: item };
+    }, {});
+    const ids = youtubeItems.map((item) => String(item.id));
+    return {
+      ...state,
+      youtubeItems: items,
+      itemsIds: ids,
     };
   })
 );
