@@ -1,1 +1,7 @@
-<p>favorite works!</p>
+<div class="search-items-container">
+  <ng-container *ngIf="this.filteredItems$ | async as youtubeItems">
+    <ng-container *ngFor="let searchItem of youtubeItems">
+      <app-search-item class="search-item" [searchItem]="searchItem"></app-search-item>
+    </ng-container>
+  </ng-container>
+</div>
