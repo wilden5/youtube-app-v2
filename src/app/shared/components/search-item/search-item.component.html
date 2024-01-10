@@ -36,6 +36,15 @@
       *ngIf="searchItem.isCustom">
       <mat-icon>delete</mat-icon>
     </button>
+    <button
+      [ngClass]="(isFavoriteItem(searchItem.id) | async) ? 'fav-active': ''"
+      *ngIf="!searchItem.isCustom"
+      (click)="addToFavorite(searchItem.id)"
+      type="button"
+      mat-icon-button
+      color="warn">
+      <mat-icon color="primary" class="fav-icon">favorite</mat-icon>
+    </button>
   </div>
   <div class="item-border" [appColoredBorder]="searchItem.snippet.publishedAt"></div>
 </mat-card>

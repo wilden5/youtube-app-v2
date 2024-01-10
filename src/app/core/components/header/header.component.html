@@ -19,6 +19,9 @@
       <button mat-fab color="warn" [routerLink]="['/search/create-item']">
         <mat-icon>add_to_queue</mat-icon>
       </button>
+      <button mat-fab color="warn" [routerLink]="['/favorite']">
+        <mat-icon>favorites</mat-icon>
+      </button>
     </div>
     <div class="auth-button">
       <div class="login-status">Login status: {{loginService.loginStatus$ | async}}</div>

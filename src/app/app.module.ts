@@ -12,6 +12,7 @@ import { CoreModule } from './core/core.module';
 import { ApiInterceptor } from './core/interceptors/api.interceptor';
 import { youtubeReducer } from './youtube/state/youtube.reducer';
 import { YoutubeEffects } from './youtube/state/youtube.effects';
+import { favoriteReducer } from './favorite/state/favorite.reducer';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +21,7 @@ import { YoutubeEffects } from './youtube/state/youtube.effects';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({ youtube: youtubeReducer }),
+    StoreModule.forRoot({ youtube: youtubeReducer, favorite: favoriteReducer }),
     EffectsModule.forRoot([YoutubeEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
