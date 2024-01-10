@@ -5,6 +5,7 @@ import {
   deleteCustomItem,
   fetchYoutubeItemsSuccess,
   loadNextPageSuccess,
+  loadPrevPageSuccess,
 } from './youtube.actions';
 
 export interface YoutubeState {
@@ -45,6 +46,17 @@ export const youtubeReducer = createReducer(
     };
   }),
   on(loadNextPageSuccess, (state, { youtubeItems }) => {
+    const items = youtubeItems.reduce((acc, item) => {
+      return { ...acc, [String(item.id)]: item };
+    }, {});
+    const ids = youtubeItems.map((item) => String(item.id));
+    return {
+      ...state,
+      youtubeItems: items,
+      itemsIds: ids,
+    };
+  }),
+  on(loadPrevPageSuccess, (state, { youtubeItems }) => {
     const items = youtubeItems.reduce((acc, item) => {
       return { ...acc, [String(item.id)]: item };
     }, {});

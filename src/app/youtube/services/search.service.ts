@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, concatMap, EMPTY, map, Observable, Subject, tap } from 'rxjs';
+import { BehaviorSubject, catchError, concatMap, EMPTY, map, Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { IYoutubeItem, IYoutubeSearchResponse } from '../models/youtube-search';
 
@@ -24,6 +24,8 @@ export class SearchService {
         tap((response) => {
           if (response.prevPageToken) {
             this.prevPageToken = response.prevPageToken;
+          } else {
+            this.prevPageToken = '';
           }
           this.nextPageToken = response.nextPageToken;
         }),

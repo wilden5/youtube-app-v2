@@ -8,6 +8,9 @@ import {
   loadNextPage,
   loadNextPageFailure,
   loadNextPageSuccess,
+  loadPrevPage,
+  loadPrevPageFailure,
+  loadPrevPageSuccess,
 } from './youtube.actions';
 import { SearchService } from '../services/search.service';
 
@@ -46,6 +49,40 @@ export class YoutubeEffects {
     () => {
       return this.actions$.pipe(
         ofType(loadNextPageFailure),
+        tap((action) => console.log(action.error))
+      );
+    },
+    { dispatch: false }
+  );
+
+  loadPrevPage$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(loadPrevPage),
+      concatMap((action) =>
+        this.searchService.fetchYoutubeItemsBySearchQuery(action.query, action.pageToken).pipe(
+          map((response) => loadPrevPageSuccess({ youtubeItems: response })),
+          catchError((error) => {
+            return of(loadPrevPageFailure({ error }));
+          })
+        )
+      )
+    );
+  });
+
+  loadPrevPageSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(loadPrevPageSuccess),
+        tap(() => console.log('Prev Youtube page fetch succeed!'))
+      );
+    },
+    { dispatch: false }
+  );
+
+  loadPrevPageFailure$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(loadPrevPageFailure),
         tap((action) => console.log(action.error))
       );
     },

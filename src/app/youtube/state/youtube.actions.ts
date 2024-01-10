@@ -40,3 +40,18 @@ export const loadNextPageFailure = createAction(
   '[YOUTUBE] Load Next Page Failure',
   props<{ error: Error }>()
 );
+
+export const loadPrevPage = createAction(
+  '[[YOUTUBE] Load Prev Page Attempt]',
+  props<{ query: string; pageToken: string }>()
+);
+
+export const loadPrevPageSuccess = createAction(
+  '[[YOUTUBE] Load Prev Page Success]',
+  props<{ youtubeItems: IYoutubeItem[] }>()
+);
+
+export const loadPrevPageFailure = createAction(
+  '[YOUTUBE] Load Prev Page Failure',
+  props<{ error: Error }>()
+);

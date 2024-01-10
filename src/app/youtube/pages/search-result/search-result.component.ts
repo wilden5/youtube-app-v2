@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { SearchService } from '../../services/search.service';
-import { loadNextPage } from '../../state/youtube.actions';
+import { loadNextPage, loadPrevPage } from '../../state/youtube.actions';
 import { AppState } from '../../../core/root.state';
 import { FiltersService } from '../../../core/services/filters.service';
 
@@ -17,7 +17,14 @@ export class SearchResultComponent {
     protected filterService: FiltersService
   ) {}
 
-  prevPageClick(): void {}
+  prevPageClick(): void {
+    this.store.dispatch(
+      loadPrevPage({
+        query: this.searchService.searchQuery.value,
+        pageToken: this.searchService.prevPageToken,
+      })
+    );
+  }
 
   nextPageClick(): void {
     this.store.dispatch(
