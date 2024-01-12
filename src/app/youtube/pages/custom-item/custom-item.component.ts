@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { AppState } from '../../../core/root.state';
 import { addCustomItem } from '../../state/youtube.actions';
 import { IYoutubeItem, IYoutubeThumbnail } from '../../models/youtube-search';
+import { dateValidator } from '../../validators/date.validator';
 
 @Component({
   selector: 'app-custom-item',
@@ -13,10 +14,12 @@ import { IYoutubeItem, IYoutubeThumbnail } from '../../models/youtube-search';
 })
 export class CustomItemComponent {
   protected createItemForm = this.fb.group({
-    title: ['', Validators.required],
-    description: ['', Validators.required],
+    title: ['', [Validators.required, Validators.max(20), Validators.min(3)]],
+    description: ['', Validators.max(255)],
     img: ['', Validators.required],
     link: ['', Validators.required],
+    creationDate: ['', [Validators.required, dateValidator]],
+    tags: this.fb.array([this.fb.control('', Validators.required)]),
   });
 
   constructor(
@@ -39,6 +42,23 @@ export class CustomItemComponent {
 
   get link(): AbstractControl {
     return this.createItemForm.get('link')!;
+  }
+
+  get tags(): FormArray {
+    return this.createItemForm.get('tags') as FormArray;
+  }
+
+  addTag(): void {
+    const tags = this.createItemForm.get('tags') as FormArray;
+    if (tags.length < 5) {
+      tags.push(this.fb.control('', Validators.required));
+    }
+  }
+
+  resetForm(): void {
+    this.createItemForm.reset();
+    this.tags.clear();
+    this.tags.push(this.fb.control('', Validators.required));
   }
 
   submitForm(): void {

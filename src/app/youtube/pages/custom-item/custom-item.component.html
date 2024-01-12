@@ -21,8 +21,36 @@
       <mat-error></mat-error>
       <input type="text" matInput formControlName="link" />
     </mat-form-field>
+    <mat-form-field class="form-field">
+      <mat-label>Created At</mat-label>
+      <mat-error>Please enter valid date</mat-error>
+      <input matInput [matDatepicker]="picker" formControlName="creationDate" />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <div formArrayName="tags">
+      <div class="tag-list" *ngFor="let control of tags.controls; let i = index">
+        <mat-form-field class="tag">
+          <mat-label>Tag {{i + 1}}</mat-label>
+          <mat-error *ngIf="control?.invalid && control?.touched">Please enter a tag</mat-error>
+          <input type="text" [formControlName]="i" matInput />
+        </mat-form-field>
+      </div>
+      <button class="tag-button" type="button" mat-raised-button color="primary" (click)="addTag()">
+        Add tag
+      </button>
+    </div>
   </form>
-  <button type="button" (click)="submitForm()" mat-raised-button color="primary">
+  <button
+    [disabled]="createItemForm.invalid"
+    type="button"
+    (click)="submitForm()"
+    mat-raised-button
+    color="primary">
     Submit form
+  </button>
+  <button (click)="resetForm()" class="reset-button" type="button" mat-raised-button color="warn">
+    Reset Form
   </button>
 </div>
